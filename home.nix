@@ -1,14 +1,19 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lazyvim, ... }:
 
 {
+  imports = [ lazyvim.homeManagerModules.default ];
+  programs.lazyvim.enable = true;
   home.username = "ph";
   home.homeDirectory = "/home/ph";
   home.stateVersion = "26.05";
 
+  home.packages = with pkgs; [
+    gcc
+  ];
+
   programs.bash = {
     enable = true;
     shellAliases = {
-      btw = "echo nixos btw bitch";
       nrs = "sudo nixos-rebuild switch";
     };
   };
